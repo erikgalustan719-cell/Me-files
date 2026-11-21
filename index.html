@@ -36,6 +36,7 @@
   }
   .orb {
     position: absolute;
+  
     border-radius: 50%;
     filter: blur(80px);
     opacity: 0.5;
@@ -144,7 +145,7 @@
     line-height: 1.6;
   }
 
-  /* ===== КНОПКА ВХОДА (ЕДИНСТВЕННАЯ) ===== */
+  /* ===== КНОПКА ВХОДА ===== */
   .btn-discord {
     display: inline-flex;
     align-items: center;
@@ -202,6 +203,59 @@
   .card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
   .card p { color: #9a9ab0; font-size: 14px; line-height: 1.6; }
 
+  /* ===== ПРАВИЛА СЕРВЕРА ===== */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .rule-block {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 20px;
+  }
+  .rule-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #a78bfa;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+    padding-bottom: 10px;
+  }
+  .rule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+  .rule-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .rule-text { color: #d1d1e0; flex: 1; padding-right: 10px; }
+  .rule-punish {
+    color: #ec4899;
+    font-weight: 700;
+    text-align: right;
+    max-width: 45%;
+    flex-shrink: 0;
+  }
+  .rule-note {
+    grid-column: 1 / -1;
+    background: rgba(236, 72, 153, 0.1);
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fbcfe8;
+  }
+
   /* ===== КОМАНДА ===== */
   .team-cards {
     display: grid;
@@ -215,24 +269,14 @@
     padding: 24px;
     text-align: center;
     transition: all 0.3s ease;
-    position: relative;
   }
   .staff-card:hover {
     border-color: rgba(167,139,250,0.8);
     box-shadow: 0 10px 30px rgba(167,139,250,0.15);
     transform: translateY(-3px);
   }
-  .staff-icon {
-    font-size: 36px;
-    margin-bottom: 12px;
-    display: inline-block;
-  }
-  .staff-display-name {
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 6px;
-  }
+  .staff-icon { font-size: 36px; margin-bottom: 12px; display: inline-block; }
+  .staff-display-name { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
   .staff-username {
     display: inline-block;
     font-size: 14px;
@@ -242,12 +286,6 @@
     border: 1px solid rgba(88, 101, 242, 0.4);
     padding: 4px 12px;
     border-radius: 8px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .staff-username:active {
-    background: rgba(88, 101, 242, 0.5);
   }
   .staff-role {
     font-size: 12px;
@@ -294,6 +332,8 @@
       border-color: rgba(167,139,250,0.5);
       box-shadow: 0 10px 30px rgba(88,101,242,0.2);
     }
+
+    .rules-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     
     .team-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .cta { padding: 50px 40px; }
@@ -325,6 +365,7 @@
   <div class="logo">Chill House</div>
   <div class="links">
     <a href="#features">Атмосфера</a>
+    <a href="#rules">Правила</a>
     <a href="#team">Команда</a>
   </div>
 </nav>
@@ -384,7 +425,73 @@
   </div>
 </section>
 
-<!-- РАЗДЕЛ: КОМАНДА СЕРВЕРА (ОБНОВЛЕНО) -->
+<!-- НОВЫЙ РАЗДЕЛ: ПРАВИЛА -->
+<section id="rules">
+  <h2 class="section-title">Правила сервера</h2>
+  <p class="section-sub">Пожалуйста, ознакомься перед общением. Незнание правил не освобождает от ответственности.</p>
+
+  <div class="rules-grid">
+    
+    <!-- ТЕКСТ -->
+    <div class="rule-block">
+      <div class="rule-title">💬 ТЕКСТ</div>
+      <div class="rule-item"><span class="rule-text">1.1 Флуд/спам</span><span class="rule-punish">мут 60м</span></div>
+      <div class="rule-item"><span class="rule-text">1.2 Реклама</span><span class="rule-punish">бан 7д/∞</span></div>
+      <div class="rule-item"><span class="rule-text">1.3 Политика</span><span class="rule-punish">пред/мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">1.4 Агрессия</span><span class="rule-punish">пред/мут</span></div>
+      <div class="rule-item"><span class="rule-text">1.5 Оскорбление родных</span><span class="rule-punish">мут 90м/бан</span></div>
+      <div class="rule-item"><span class="rule-text">1.6 Обман</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">1.7 Оск Религии/нации</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">1.8 18+</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">1.9 Оскорбление админов</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">1.10 Спам-пинги</span><span class="rule-punish">мут 60м</span></div>
+      <div class="rule-item"><span class="rule-text">1.11 Доксинг/фишинг</span><span class="rule-punish">бан ∞</span></div>
+      <div class="rule-item"><span class="rule-text">1.12 Травля/угрозы</span><span class="rule-punish">мут/бан</span></div>
+    </div>
+
+    <!-- ГОЛОС -->
+    <div class="rule-block">
+      <div class="rule-title">🎙 ГОЛОС</div>
+      <div class="rule-item"><span class="rule-text">2.1 Реклама</span><span class="rule-punish">бан 7д/∞</span></div>
+      <div class="rule-item"><span class="rule-text">2.2 Политика</span><span class="rule-punish">пред/мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">2.3 Агрессия</span><span class="rule-punish">пред/мут</span></div>
+      <div class="rule-item"><span class="rule-text">2.4 Оскорбление родных</span><span class="rule-punish">мут 90м/бан</span></div>
+      <div class="rule-item"><span class="rule-text">2.5 Обман</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">2.6 Оск Религии/нации</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">2.7 18+</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">2.8 Soundboard/шум</span><span class="rule-punish">пред/мут</span></div>
+      <div class="rule-item"><span class="rule-text">2.9 Оскорбление админов</span><span class="rule-punish">мут/бан</span></div>
+      <div class="rule-item"><span class="rule-text">2.10 Крики/перебивание</span><span class="rule-punish">пред/мут</span></div>
+    </div>
+
+    <!-- НИКИ -->
+    <div class="rule-block">
+      <div class="rule-title">👤 НИКИ</div>
+      <div class="rule-item"><span class="rule-text">3.1 Оскорбительные</span><span class="rule-punish">пред/смена/бан</span></div>
+      <div class="rule-item"><span class="rule-text">3.2 Реклама</span><span class="rule-punish">пред/бан</span></div>
+      <div class="rule-item"><span class="rule-text">3.3 18+ аватары</span><span class="rule-punish">пред/кик/бан</span></div>
+      <div class="rule-item"><span class="rule-text">3.4 Выдача за админа</span><span class="rule-punish">бан ∞</span></div>
+    </div>
+
+    <!-- ОБЩЕЕ -->
+    <div class="rule-block">
+      <div class="rule-title">🛡 ОБЩЕЕ</div>
+      <div class="rule-item"><span class="rule-text">4.1 Незнание правил</span><span class="rule-punish">≠ ответственность</span></div>
+      <div class="rule-item"><span class="rule-text">4.2 Обход наказания</span><span class="rule-punish">бан ∞</span></div>
+      <div class="rule-item"><span class="rule-text">4.3 Жалобы</span><span class="rule-punish">в тикеты</span></div>
+      <div class="rule-item"><span class="rule-text">4.4 Решение руководства</span><span class="rule-punish">окончательное</span></div>
+      <div class="rule-item"><span class="rule-text">4.5 Уважайте участников</span><span class="rule-punish">всегда</span></div>
+    </div>
+
+    <!-- Дополнительное правило 4.6 -->
+    <div class="rule-note">
+      * 4.6 Руководство сервера может выдать игроку наказание, если считает, что он наносит ущерб серверу или участникам.
+    </div>
+
+  </div>
+</section>
+
+<!-- РАЗДЕЛ: КОМАНДА СЕРВЕРА -->
 <section id="team">
   <h2 class="section-title">Наша команда</h2>
   <p class="section-sub">Те, кто следит за порядком и уютом</p>
