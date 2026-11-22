@@ -8,22 +8,68 @@
 <title>Chill House | Твой уголок отдыха</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
+  /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕМ ===== */
+  :root {
+    /* Темная тема (по умолчанию) */
+    --bg-color: #0a0a10;
+    --text-main: #ffffff;
+    --text-muted: #9a9ab0;
+    --nav-bg: rgba(10,10,16,0.6);
+    --card-bg: rgba(255,255,255,0.03);
+    --card-border: rgba(255,255,255,0.08);
+    --rule-text: #d1d1e0;
+    --rule-border: rgba(255,255,255,0.05);
+    --footer-text: #6a6a80;
+    --details-bg: rgba(255,255,255,0.03);
+    --details-border: rgba(255,255,255,0.08);
+    --hero-grad-start: #ffffff;
+    --step-bg: rgba(255,255,255,0.03);
+    --step-border: rgba(255,255,255,0.08);
+    --staff-bg: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    --orb-opacity: 0.5;
+    --btn-text: #ffffff;
+  }
+
+  /* Светлая тема */
+  body.light-theme {
+    --bg-color: #f2f3f7;
+    --text-main: #1a1a2e;
+    --text-muted: #555577;
+    --nav-bg: rgba(242,243,247,0.8);
+    --card-bg: rgba(255,255,255,0.7);
+    --card-border: rgba(0,0,0,0.08);
+    --rule-text: #333344;
+    --rule-border: rgba(0,0,0,0.08);
+    --footer-text: #777788;
+    --details-bg: rgba(255,255,255,0.7);
+    --details-border: rgba(0,0,0,0.08);
+    --hero-grad-start: #1a1a2e;
+    --step-bg: rgba(255,255,255,0.7);
+    --step-border: rgba(0,0,0,0.08);
+    --staff-bg: linear-gradient(180deg, #ffffff 0%, #f2f3f7 100%);
+    --orb-opacity: 0.15;
+    --btn-text: #ffffff;
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
   }
+  
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  
   body {
     font-family: 'Montserrat', sans-serif;
-    background: #0a0a10;
-    color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.5;
     min-height: 100svh;
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   /* ===== ЖИВОЙ ФОН ===== */
@@ -32,14 +78,16 @@
     inset: 0;
     z-index: -1;
     overflow: hidden;
-    background: #0a0a10;
+    background-color: var(--bg-color);
+    transition: background-color 0.4s ease;
   }
   .orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.5;
+    opacity: var(--orb-opacity);
     animation: float 20s infinite ease-in-out alternate;
+    transition: opacity 0.4s ease;
   }
   .orb-1 { width: 300px; height: 300px; background: #5865F2; top: -10%; left: -10%; animation-delay: 0s; }
   .orb-2 { width: 250px; height: 250px; background: #a78bfa; bottom: -10%; right: -10%; animation-delay: -5s; }
@@ -61,10 +109,11 @@
     top: 0;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    background: rgba(10,10,16,0.6);
+    background: var(--nav-bg);
     z-index: 100;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--card-border);
     padding-top: max(14px, env(safe-area-inset-top));
+    transition: background 0.4s ease, border-color 0.4s ease;
   }
   nav .logo {
     font-weight: 900;
@@ -77,14 +126,32 @@
     white-space: nowrap;
     text-transform: uppercase;
   }
-  nav .links { display: flex; gap: 12px; flex-shrink: 0; }
+  nav .links { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
   nav a {
-    color: #d1d1e0;
+    color: var(--text-muted);
     text-decoration: none;
     font-weight: 600;
     font-size: 12px;
     padding: 6px 0;
+    transition: color 0.3s;
   }
+  
+  /* Кнопка переключения темы */
+  .theme-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .theme-btn:active { transform: scale(0.9); }
 
   /* ===== HERO ===== */
   .hero {
@@ -100,15 +167,16 @@
     display: inline-flex;
     align-items: center;
     gap: 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     padding: 8px 16px;
     border-radius: 100px;
     font-size: 12px;
     font-weight: 700;
-    color: #d1d1e0;
+    color: var(--text-muted);
     margin-bottom: 24px;
     backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
   }
   .stat-item { display: flex; align-items: center; gap: 6px; }
   .dot-online { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite; }
@@ -126,28 +194,30 @@
     line-height: 1.1;
     margin-bottom: 16px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #ffffff 20%, #a78bfa 50%, #ec4899 80%);
+    background: linear-gradient(135deg, var(--hero-grad-start) 20%, #a78bfa 50%, #ec4899 80%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 30px rgba(167, 139, 250, 0.3);
+    transition: background 0.4s ease;
   }
   .hero p {
     font-size: 15px;
-    color: #9a9ab0;
+    color: var(--text-muted);
     max-width: 500px;
     margin-bottom: 32px;
     line-height: 1.6;
+    transition: color 0.4s ease;
   }
 
-  /* ===== КНОПКА ВХОДА (Добавлено свечение) ===== */
+  /* ===== КНОПКА ВХОДА ===== */
   .btn-discord {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     background: linear-gradient(135deg, #5865F2, #7c3aed);
-    color: #fff;
+    color: var(--btn-text);
     padding: 16px 32px;
     border-radius: 16px;
     font-weight: 800;
@@ -164,8 +234,8 @@
   .btn-discord svg { width: 22px; height: 22px; flex-shrink: 0; }
 
   @keyframes neonPulse {
-    0% { box-shadow: 0 0 15px rgba(88,101,242,0.4), 0 10px 25px rgba(0,0,0,0.3); }
-    100% { box-shadow: 0 0 30px rgba(88,101,242,0.8), 0 10px 25px rgba(0,0,0,0.3); border-color: rgba(167,139,250,0.8); }
+    0% { box-shadow: 0 0 15px rgba(88,101,242,0.4), 0 10px 25px rgba(0,0,0,0.1); }
+    100% { box-shadow: 0 0 30px rgba(88,101,242,0.8), 0 10px 25px rgba(0,0,0,0.1); border-color: rgba(167,139,250,0.8); }
   }
 
   /* ===== СЕКЦИИ ===== */
@@ -177,23 +247,22 @@
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: var(--text-main);
+    transition: color 0.4s ease;
   }
   .section-sub {
     text-align: center;
-    color: #8a8a9e;
+    color: var(--text-muted);
     margin-bottom: 32px;
     font-size: 14px;
+    transition: color 0.4s ease;
   }
 
-  /* ===== КАРТОЧКИ ФИШЕК (Добавлено свечение при наведении) ===== */
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+  /* ===== КАРТОЧКИ ФИШЕК ===== */
+  .cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
   .card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 20px;
     padding: 24px;
     backdrop-filter: blur(10px);
@@ -201,22 +270,18 @@
   }
   .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(167,139,250,0.3), inset 0 0 15px rgba(167,139,250,0.1);
+    box-shadow: 0 0 25px rgba(167,139,250,0.3), inset 0 0 15px rgba(167,139,250,0.05);
     border-color: rgba(167,139,250,0.6);
   }
   .card .icon { font-size: 32px; margin-bottom: 16px; display: inline-block; }
-  .card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
-  .card p { color: #9a9ab0; font-size: 14px; line-height: 1.6; }
+  .card h3 { font-size: 17px; margin-bottom: 8px; color: var(--text-main); transition: color 0.4s ease; }
+  .card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; transition: color 0.4s ease; }
 
-  /* ===== С ЧЕГО НАЧАТЬ (ШАГИ) ===== */
-  .steps-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+  /* ===== С ЧЕГО НАЧАТЬ ===== */
+  .steps-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
   .step-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--step-bg);
+    border: 1px solid var(--step-border);
     border-radius: 20px;
     padding: 24px;
     position: relative;
@@ -224,7 +289,7 @@
   }
   .step-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(167,139,250,0.3), inset 0 0 15px rgba(167,139,250,0.1);
+    box-shadow: 0 0 25px rgba(167,139,250,0.3), inset 0 0 15px rgba(167,139,250,0.05);
     border-color: rgba(167,139,250,0.6);
   }
   .step-num {
@@ -235,43 +300,44 @@
     font-weight: 900; font-size: 18px; color: #fff;
     margin-bottom: 16px;
   }
-  .step-card h3 { font-size: 16px; margin-bottom: 8px; }
-  .step-card p { color: #9a9ab0; font-size: 14px; }
+  .step-card h3 { font-size: 16px; margin-bottom: 8px; color: var(--text-main); transition: color 0.4s ease; }
+  .step-card p { color: var(--text-muted); font-size: 14px; transition: color 0.4s ease; }
 
   /* ===== FAQ ===== */
   .faq-grid { display: flex; flex-direction: column; gap: 12px; }
   details {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--details-bg);
+    border: 1px solid var(--details-border);
     border-radius: 16px;
     padding: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
   }
   details[open] { background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.3); box-shadow: 0 0 15px rgba(167,139,250,0.15); }
   summary {
-    font-weight: 700; font-size: 15px; color: #fff;
+    font-weight: 700; font-size: 15px; color: var(--text-main);
     list-style: none; display: flex; justify-content: space-between; align-items: center;
+    transition: color 0.4s ease;
   }
   summary::-webkit-details-marker { display: none; }
   summary::after { content: '+'; font-size: 20px; color: #a78bfa; transition: 0.3s; }
   details[open] summary::after { transform: rotate(45deg); }
-  .faq-answer { margin-top: 12px; color: #9a9ab0; font-size: 14px; line-height: 1.6; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .faq-answer { margin-top: 12px; color: var(--text-muted); font-size: 14px; line-height: 1.6; padding-top: 12px; border-top: 1px solid var(--rule-border); transition: color 0.4s ease, border-color 0.4s ease; }
 
   /* ===== ПРАВИЛА ===== */
   .rules-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  .rule-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 20px; }
+  .rule-block { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 20px; transition: all 0.4s ease; }
   .rule-title { font-size: 16px; font-weight: 800; color: #a78bfa; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(167, 139, 250, 0.2); padding-bottom: 10px; }
-  .rule-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); font-size: 13.5px; line-height: 1.4; }
+  .rule-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed var(--rule-border); font-size: 13.5px; line-height: 1.4; transition: border-color 0.4s ease; }
   .rule-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .rule-text { color: #d1d1e0; flex: 1; padding-right: 10px; }
+  .rule-text { color: var(--rule-text); flex: 1; padding-right: 10px; transition: color 0.4s ease; }
   .rule-punish { color: #ec4899; font-weight: 700; text-align: right; max-width: 45%; flex-shrink: 0; }
   .rule-note { grid-column: 1 / -1; background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 16px; padding: 16px; text-align: center; font-size: 13px; font-weight: 600; color: #fbcfe8; }
 
-  /* ===== КОМАНДА (Добавлено свечение при наведении) ===== */
+  /* ===== КОМАНДА ===== */
   .team-cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
   .staff-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    background: var(--staff-bg);
     border: 1px solid rgba(167,139,250,0.3);
     border-radius: 20px; padding: 24px; text-align: center; transition: all 0.4s ease;
   }
@@ -281,17 +347,17 @@
     transform: translateY(-5px); 
   }
   .staff-icon { font-size: 36px; margin-bottom: 12px; display: inline-block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
-  .staff-display-name { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-  .staff-username { display: inline-block; font-size: 14px; font-weight: 600; color: #d1d1e0; background: rgba(88, 101, 242, 0.2); border: 1px solid rgba(88, 101, 242, 0.4); padding: 4px 12px; border-radius: 8px; }
+  .staff-display-name { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; transition: color 0.4s ease; }
+  .staff-username { display: inline-block; font-size: 14px; font-weight: 600; color: var(--text-muted); background: rgba(88, 101, 242, 0.15); border: 1px solid rgba(88, 101, 242, 0.3); padding: 4px 12px; border-radius: 8px; transition: all 0.4s ease; }
   .staff-role { font-size: 12px; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-top: 12px; }
 
   /* ===== CTA ===== */
   .cta { text-align: center; background: linear-gradient(180deg, rgba(88,101,242,0.1) 0%, rgba(10,10,16,0) 100%); border: 1px solid rgba(88,101,242,0.2); border-radius: 24px; padding: 40px 20px; margin-bottom: 20px; }
-  .cta h2 { font-size: 22px; font-weight: 900; margin-bottom: 10px; }
-  .cta p { color: #a0a0b3; font-size: 14px; }
+  .cta h2 { font-size: 22px; font-weight: 900; margin-bottom: 10px; color: var(--text-main); transition: color 0.4s ease; }
+  .cta p { color: var(--text-muted); font-size: 14px; transition: color 0.4s ease; }
 
   /* ===== FOOTER ===== */
-  footer { text-align: center; padding: 32px 16px calc(32px + env(safe-area-inset-bottom)); color: #6a6a80; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
+  footer { text-align: center; padding: 32px 16px calc(32px + env(safe-area-inset-bottom)); color: var(--footer-text); font-size: 12px; border-top: 1px solid var(--card-border); margin-top: 20px; transition: all 0.4s ease; }
 
   /* ===== КНОПКА "НАВЕРХ" ===== */
   #scrollTopBtn {
@@ -301,7 +367,7 @@
     width: 50px;
     height: 50px;
     background: linear-gradient(135deg, #5865F2, #a78bfa);
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 50%;
     font-size: 24px;
@@ -316,15 +382,10 @@
     align-items: center;
     justify-content: center;
   }
-  #scrollTopBtn.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+  #scrollTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
   #scrollTopBtn:active { transform: scale(0.9); }
   #scrollTopBtn:hover { box-shadow: 0 0 25px rgba(167,139,250,0.8); }
 
-  /* Безопасные отступы для iPhone */
   @supports (padding-bottom: env(safe-area-inset-bottom)) {
     #scrollTopBtn { bottom: calc(24px + env(safe-area-inset-bottom)); }
   }
@@ -334,6 +395,7 @@
     nav { padding: 18px 40px; }
     nav .logo { font-size: 20px; }
     nav a { font-size: 14px; margin-left: 10px; }
+    .theme-btn { width: 36px; height: 36px; font-size: 18px; }
     .hero { padding: 80px 30px 60px; }
     .btn-discord { width: auto; padding: 18px 40px; font-size: 16px; }
     
@@ -372,6 +434,8 @@
     <a href="#features">Фишки</a>
     <a href="#rules">Правила</a>
     <a href="#faq">FAQ</a>
+    <!-- Кнопка темы -->
+    <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему">🌙</button>
   </div>
 </nav>
 
@@ -565,6 +629,29 @@
 
 <!-- СКРИПТЫ -->
 <script>
+  // --- ПЕРЕКЛЮЧАТЕЛЬ ТЕМ ---
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const body = document.body;
+
+  // Проверяем сохраненную тему
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-theme');
+    themeToggleBtn.innerText = '☀️';
+  }
+
+  // Обработчик клика
+  themeToggleBtn.addEventListener('click', () => {
+    body.classList.toggle('light-theme');
+    
+    if (body.classList.contains('light-theme')) {
+      localStorage.setItem('theme', 'light');
+      themeToggleBtn.innerText = '☀️';
+    } else {
+      localStorage.setItem('theme', 'dark');
+      themeToggleBtn.innerText = '🌙';
+    }
+  });
+
   // --- СТАТИСТИКА ОНЛАЙНА ---
   const inviteCode = 'JAPHSp5Dc';
   
@@ -588,12 +675,11 @@
   }
 
   getDiscordStats();
-  setInterval(getDiscordStats, 60000); // Исправлена опечатка тут!
+  setInterval(getDiscordStats, 60000);
 
   // --- КНОПКА НАВЕРХ ---
   const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-  // Показываем кнопку, когда прокрутили вниз на 300 пикселей
   window.onscroll = function() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
       scrollTopBtn.classList.add("show");
@@ -602,7 +688,6 @@
     }
   };
 
-  // Плавный скролл наверх при клике
   scrollTopBtn.onclick = function() {
     window.scrollTo({
       top: 0,
