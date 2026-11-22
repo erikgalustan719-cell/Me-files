@@ -284,7 +284,9 @@
     .cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,0.5); box-shadow: 0 10px 30px rgba(88,101,242,0.2); }
 
-    .steps-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    /* Теперь тут 2 карточки вместо 3 */
+    .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    
     .rules-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .team-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .cta { padding: 50px 40px; }
@@ -343,10 +345,10 @@
   </a>
 </header>
 
-<!-- НОВЫЙ БЛОК: С ЧЕГО НАЧАТЬ -->
+<!-- БЛОК: С ЧЕГО НАЧАТЬ (Осталось 2 шага) -->
 <section id="start">
   <h2 class="section-title">С чего начать?</h2>
-  <p class="section-sub">Три простых шага, чтобы стать своим</p>
+  <p class="section-sub">Два простых шага, чтобы стать своим</p>
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-num">1</div>
@@ -358,11 +360,6 @@
       <h3>Читай правила</h3>
       <p>Ознакомься с правилами ниже, чтобы избежать неприятных ситуаций.</p>
     </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <h3>Выбирай роли</h3>
-      <p>Зайди в канал #роли и выбери игры или интересы, чтобы найти друзей!</p>
-    </div>
   </div>
 </section>
 
@@ -370,6 +367,7 @@
   <h2 class="section-title">Что у нас есть?</h2>
   <p class="section-sub">Всё для идеального чилла</p>
 
+  <!-- Убрали карточку "Ивенты и нитро" -->
   <div class="cards">
     <div class="card">
       <span class="icon">🍿</span>
@@ -390,11 +388,6 @@
       <span class="icon">🎵</span>
       <h3>Музыка 24/7</h3>
       <p>Заходи в войс и слушай свои любимые треки вместе с нами.</p>
-    </div>
-    <div class="card">
-      <span class="icon">🎁</span>
-      <h3>Ивенты и нитро</h3>
-      <p>Частые розыгрыши Discord Nitro, игр и других вкусняшек.</p>
     </div>
     <div class="card">
       <span class="icon">🛡</span>
@@ -462,7 +455,7 @@
   </div>
 </section>
 
-<!-- НОВЫЙ БЛОК: FAQ -->
+<!-- БЛОК: FAQ (Убрали 2 вопроса) -->
 <section id="faq">
   <h2 class="section-title">Частые вопросы</h2>
   <p class="section-sub">Ответы на то, что спрашивают чаще всего</p>
@@ -473,16 +466,8 @@
       <div class="faq-answer">Зайди в канал #тикеты и создай обращение. Прикрепи скриншоты или видео нарушения, чтобы модерация могла быстро разобраться.</div>
     </details>
     <details>
-      <summary>Как получить роли игр или интересов?</summary>
-      <div class="faq-answer">Перейди в канал #роли и нажми на реакции под сообщением с нужной игрой (например, CS2, Minecraft). Роль выдастся автоматически.</div>
-    </details>
-    <details>
       <summary>Можно ли рекламировать свой сервер?</summary>
       <div class="faq-answer">Нет, реклама сторонних серверов и ссылок строго запрещена (правило 1.2). Это карается баном.</div>
-    </details>
-    <details>
-      <summary>Как стать модератором?</summary>
-      <div class="faq-answer">Следи за каналом #объявления. Когда открывается набор в стафф, там появляется специальная форма для заполнения.</div>
     </details>
   </div>
 </section>
@@ -526,7 +511,6 @@
 
 <!-- СКРИПТ: ОНЛАЙН И ОФФЛАЙН СТАТИСТИКА -->
 <script>
-  // Используем API приглашения, чтобы получить и онлайн, и общее число
   const inviteCode = 'JAPHSp5Dc';
   
   async function getDiscordStats() {
@@ -538,21 +522,18 @@
       
       const online = data.approximate_presence_count || 0;
       const total = data.approximate_member_count || 0;
-      // Считаем оффлайн (всего минус онлайн)
       const offline = total - online; 
       
       document.getElementById('online-count').innerText = online;
       document.getElementById('offline-count').innerText = offline > 0 ? offline : 0;
       
     } catch (error) {
-      // Если произошла ошибка (например, заблокировали API), скрываем цифры
       document.getElementById('stats-container').innerHTML = '<span style="color: #a78bfa;">Chill House • Уютный сервер</span>';
     }
   }
 
-  // Запускаем сразу и обновляем каждые 60 секунд
   getDiscordStats();
-  setInterval(getDiscordStats, 60000);
+  setInterval(getDiscsStats, 60000);
 </script>
 
 </body>
