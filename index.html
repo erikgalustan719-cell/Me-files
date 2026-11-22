@@ -140,7 +140,7 @@
     line-height: 1.6;
   }
 
-  /* ===== КНОПКА ВХОДА ===== */
+  /* ===== КНОПКА ВХОДА (Добавлено свечение) ===== */
   .btn-discord {
     display: inline-flex;
     align-items: center;
@@ -153,15 +153,20 @@
     font-weight: 800;
     font-size: 15px;
     text-decoration: none;
-    box-shadow: 0 0 20px rgba(88,101,242,0.4), 0 10px 25px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
     min-height: 54px;
     width: 100%;
     max-width: 320px;
     border: 1px solid rgba(255,255,255,0.2);
+    animation: neonPulse 2s infinite alternate;
   }
   .btn-discord:active { transform: scale(0.96); }
   .btn-discord svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  @keyframes neonPulse {
+    0% { box-shadow: 0 0 15px rgba(88,101,242,0.4), 0 10px 25px rgba(0,0,0,0.3); }
+    100% { box-shadow: 0 0 30px rgba(88,101,242,0.8), 0 10px 25px rgba(0,0,0,0.3); border-color: rgba(167,139,250,0.8); }
+  }
 
   /* ===== СЕКЦИИ ===== */
   section { padding: 40px 16px; max-width: 1000px; margin: 0 auto; }
@@ -180,7 +185,7 @@
     font-size: 14px;
   }
 
-  /* ===== КАРТОЧКИ ФИШЕК ===== */
+  /* ===== КАРТОЧКИ ФИШЕК (Добавлено свечение при наведении) ===== */
   .cards {
     display: grid;
     grid-template-columns: 1fr;
@@ -192,7 +197,12 @@
     border-radius: 20px;
     padding: 24px;
     backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(167,139,250,0.3), inset 0 0 15px rgba(167,139,250,0.1);
+    border-color: rgba(167,139,250,0.6);
   }
   .card .icon { font-size: 32px; margin-bottom: 16px; display: inline-block; }
   .card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
@@ -210,6 +220,12 @@
     border-radius: 20px;
     padding: 24px;
     position: relative;
+    transition: all 0.4s ease;
+  }
+  .step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(167,139,250,0.3), inset 0 0 15px rgba(167,139,250,0.1);
+    border-color: rgba(167,139,250,0.6);
   }
   .step-num {
     width: 36px; height: 36px;
@@ -232,7 +248,7 @@
     cursor: pointer;
     transition: 0.3s;
   }
-  details[open] { background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.3); }
+  details[open] { background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.3); box-shadow: 0 0 15px rgba(167,139,250,0.15); }
   summary {
     font-weight: 700; font-size: 15px; color: #fff;
     list-style: none; display: flex; justify-content: space-between; align-items: center;
@@ -252,15 +268,19 @@
   .rule-punish { color: #ec4899; font-weight: 700; text-align: right; max-width: 45%; flex-shrink: 0; }
   .rule-note { grid-column: 1 / -1; background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 16px; padding: 16px; text-align: center; font-size: 13px; font-weight: 600; color: #fbcfe8; }
 
-  /* ===== КОМАНДА ===== */
+  /* ===== КОМАНДА (Добавлено свечение при наведении) ===== */
   .team-cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
   .staff-card {
     background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
     border: 1px solid rgba(167,139,250,0.3);
-    border-radius: 20px; padding: 24px; text-align: center; transition: all 0.3s ease;
+    border-radius: 20px; padding: 24px; text-align: center; transition: all 0.4s ease;
   }
-  .staff-card:hover { border-color: rgba(167,139,250,0.8); box-shadow: 0 10px 30px rgba(167,139,250,0.15); transform: translateY(-3px); }
-  .staff-icon { font-size: 36px; margin-bottom: 12px; display: inline-block; }
+  .staff-card:hover { 
+    border-color: rgba(167,139,250,0.9); 
+    box-shadow: 0 0 30px rgba(167,139,250,0.4), inset 0 0 15px rgba(167,139,250,0.1); 
+    transform: translateY(-5px); 
+  }
+  .staff-icon { font-size: 36px; margin-bottom: 12px; display: inline-block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
   .staff-display-name { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
   .staff-username { display: inline-block; font-size: 14px; font-weight: 600; color: #d1d1e0; background: rgba(88, 101, 242, 0.2); border: 1px solid rgba(88, 101, 242, 0.4); padding: 4px 12px; border-radius: 8px; }
   .staff-role { font-size: 12px; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-top: 12px; }
@@ -273,6 +293,42 @@
   /* ===== FOOTER ===== */
   footer { text-align: center; padding: 32px 16px calc(32px + env(safe-area-inset-bottom)); color: #6a6a80; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
 
+  /* ===== КНОПКА "НАВЕРХ" ===== */
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #5865F2, #a78bfa);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(88,101,242,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #scrollTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  #scrollTopBtn:active { transform: scale(0.9); }
+  #scrollTopBtn:hover { box-shadow: 0 0 25px rgba(167,139,250,0.8); }
+
+  /* Безопасные отступы для iPhone */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    #scrollTopBtn { bottom: calc(24px + env(safe-area-inset-bottom)); }
+  }
+
   /* ============================================================= */
   @media (min-width: 600px) {
     nav { padding: 18px 40px; }
@@ -282,14 +338,12 @@
     .btn-discord { width: auto; padding: 18px 40px; font-size: 16px; }
     
     .cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,0.5); box-shadow: 0 10px 30px rgba(88,101,242,0.2); }
-
-    /* Теперь тут 2 карточки вместо 3 */
     .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    
     .rules-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .team-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .cta { padding: 50px 40px; }
+    
+    #scrollTopBtn { bottom: 40px; right: 40px; width: 55px; height: 55px; }
   }
 
   @media (min-width: 900px) {
@@ -345,7 +399,6 @@
   </a>
 </header>
 
-<!-- БЛОК: С ЧЕГО НАЧАТЬ (Осталось 2 шага) -->
 <section id="start">
   <h2 class="section-title">С чего начать?</h2>
   <p class="section-sub">Два простых шага, чтобы стать своим</p>
@@ -367,7 +420,6 @@
   <h2 class="section-title">Что у нас есть?</h2>
   <p class="section-sub">Всё для идеального чилла</p>
 
-  <!-- Убрали карточку "Ивенты и нитро" -->
   <div class="cards">
     <div class="card">
       <span class="icon">🍿</span>
@@ -455,7 +507,6 @@
   </div>
 </section>
 
-<!-- БЛОК: FAQ (Убрали 2 вопроса) -->
 <section id="faq">
   <h2 class="section-title">Частые вопросы</h2>
   <p class="section-sub">Ответы на то, что спрашивают чаще всего</p>
@@ -509,8 +560,12 @@
   © 2026 Chill House • Сделано с душой 💜
 </footer>
 
-<!-- СКРИПТ: ОНЛАЙН И ОФФЛАЙН СТАТИСТИКА -->
+<!-- Кнопка Наверх -->
+<button id="scrollTopBtn" aria-label="Наверх">↑</button>
+
+<!-- СКРИПТЫ -->
 <script>
+  // --- СТАТИСТИКА ОНЛАЙНА ---
   const inviteCode = 'JAPHSp5Dc';
   
   async function getDiscordStats() {
@@ -533,7 +588,27 @@
   }
 
   getDiscordStats();
-  setInterval(getDiscsStats, 60000);
+  setInterval(getDiscordStats, 60000); // Исправлена опечатка тут!
+
+  // --- КНОПКА НАВЕРХ ---
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Показываем кнопку, когда прокрутили вниз на 300 пикселей
+  window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+      scrollTopBtn.classList.add("show");
+    } else {
+      scrollTopBtn.classList.remove("show");
+    }
+  };
+
+  // Плавный скролл наверх при клике
+  scrollTopBtn.onclick = function() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 </script>
 
 </body>
