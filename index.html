@@ -36,7 +36,6 @@
   }
   .orb {
     position: absolute;
-  
     border-radius: 50%;
     filter: blur(80px);
     opacity: 0.5;
@@ -97,10 +96,10 @@
     padding: 60px 20px 40px;
   }
   
-  .online-badge {
+  .stats-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
     padding: 8px 16px;
@@ -111,14 +110,10 @@
     margin-bottom: 24px;
     backdrop-filter: blur(10px);
   }
-  .online-dot {
-    width: 8px;
-    height: 8px;
-    background: #10b981;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #10b981;
-    animation: pulse 2s infinite;
-  }
+  .stat-item { display: flex; align-items: center; gap: 6px; }
+  .dot-online { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite; }
+  .dot-offline { width: 8px; height: 8px; background: #6b7280; border-radius: 50%; }
+  
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
@@ -203,120 +198,80 @@
   .card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
   .card p { color: #9a9ab0; font-size: 14px; line-height: 1.6; }
 
-  /* ===== ПРАВИЛА СЕРВЕРА ===== */
-  .rules-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .rule-block {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 20px;
-  }
-  .rule-title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #a78bfa;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid rgba(167, 139, 250, 0.2);
-    padding-bottom: 10px;
-  }
-  .rule-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px dashed rgba(255,255,255,0.05);
-    font-size: 13.5px;
-    line-height: 1.4;
-  }
-  .rule-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .rule-text { color: #d1d1e0; flex: 1; padding-right: 10px; }
-  .rule-punish {
-    color: #ec4899;
-    font-weight: 700;
-    text-align: right;
-    max-width: 45%;
-    flex-shrink: 0;
-  }
-  .rule-note {
-    grid-column: 1 / -1;
-    background: rgba(236, 72, 153, 0.1);
-    border: 1px solid rgba(236, 72, 153, 0.3);
-    border-radius: 16px;
-    padding: 16px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    color: #fbcfe8;
-  }
-
-  /* ===== КОМАНДА ===== */
-  .team-cards {
+  /* ===== С ЧЕГО НАЧАТЬ (ШАГИ) ===== */
+  .steps-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
   }
+  .step-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+  }
+  .step-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #5865F2, #a78bfa);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #fff;
+    margin-bottom: 16px;
+  }
+  .step-card h3 { font-size: 16px; margin-bottom: 8px; }
+  .step-card p { color: #9a9ab0; font-size: 14px; }
+
+  /* ===== FAQ ===== */
+  .faq-grid { display: flex; flex-direction: column; gap: 12px; }
+  details {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  details[open] { background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.3); }
+  summary {
+    font-weight: 700; font-size: 15px; color: #fff;
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 20px; color: #a78bfa; transition: 0.3s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  .faq-answer { margin-top: 12px; color: #9a9ab0; font-size: 14px; line-height: 1.6; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+  /* ===== ПРАВИЛА ===== */
+  .rules-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .rule-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 20px; }
+  .rule-title { font-size: 16px; font-weight: 800; color: #a78bfa; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(167, 139, 250, 0.2); padding-bottom: 10px; }
+  .rule-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); font-size: 13.5px; line-height: 1.4; }
+  .rule-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .rule-text { color: #d1d1e0; flex: 1; padding-right: 10px; }
+  .rule-punish { color: #ec4899; font-weight: 700; text-align: right; max-width: 45%; flex-shrink: 0; }
+  .rule-note { grid-column: 1 / -1; background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 16px; padding: 16px; text-align: center; font-size: 13px; font-weight: 600; color: #fbcfe8; }
+
+  /* ===== КОМАНДА ===== */
+  .team-cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
   .staff-card {
     background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
     border: 1px solid rgba(167,139,250,0.3);
-    border-radius: 20px;
-    padding: 24px;
-    text-align: center;
-    transition: all 0.3s ease;
+    border-radius: 20px; padding: 24px; text-align: center; transition: all 0.3s ease;
   }
-  .staff-card:hover {
-    border-color: rgba(167,139,250,0.8);
-    box-shadow: 0 10px 30px rgba(167,139,250,0.15);
-    transform: translateY(-3px);
-  }
+  .staff-card:hover { border-color: rgba(167,139,250,0.8); box-shadow: 0 10px 30px rgba(167,139,250,0.15); transform: translateY(-3px); }
   .staff-icon { font-size: 36px; margin-bottom: 12px; display: inline-block; }
   .staff-display-name { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-  .staff-username {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #d1d1e0;
-    background: rgba(88, 101, 242, 0.2);
-    border: 1px solid rgba(88, 101, 242, 0.4);
-    padding: 4px 12px;
-    border-radius: 8px;
-  }
-  .staff-role {
-    font-size: 12px;
-    color: #a78bfa;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 800;
-    margin-top: 12px;
-  }
+  .staff-username { display: inline-block; font-size: 14px; font-weight: 600; color: #d1d1e0; background: rgba(88, 101, 242, 0.2); border: 1px solid rgba(88, 101, 242, 0.4); padding: 4px 12px; border-radius: 8px; }
+  .staff-role { font-size: 12px; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-top: 12px; }
 
   /* ===== CTA ===== */
-  .cta {
-    text-align: center;
-    background: linear-gradient(180deg, rgba(88,101,242,0.1) 0%, rgba(10,10,16,0) 100%);
-    border: 1px solid rgba(88,101,242,0.2);
-    border-radius: 24px;
-    padding: 40px 20px;
-    margin-bottom: 20px;
-  }
+  .cta { text-align: center; background: linear-gradient(180deg, rgba(88,101,242,0.1) 0%, rgba(10,10,16,0) 100%); border: 1px solid rgba(88,101,242,0.2); border-radius: 24px; padding: 40px 20px; margin-bottom: 20px; }
   .cta h2 { font-size: 22px; font-weight: 900; margin-bottom: 10px; }
   .cta p { color: #a0a0b3; font-size: 14px; }
 
   /* ===== FOOTER ===== */
-  footer {
-    text-align: center;
-    padding: 32px 16px calc(32px + env(safe-area-inset-bottom));
-    color: #6a6a80;
-    font-size: 12px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    margin-top: 20px;
-  }
+  footer { text-align: center; padding: 32px 16px calc(32px + env(safe-area-inset-bottom)); color: #6a6a80; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
 
   /* ============================================================= */
   @media (min-width: 600px) {
@@ -327,14 +282,10 @@
     .btn-discord { width: auto; padding: 18px 40px; font-size: 16px; }
     
     .cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .card:hover { 
-      transform: translateY(-5px); 
-      border-color: rgba(167,139,250,0.5);
-      box-shadow: 0 10px 30px rgba(88,101,242,0.2);
-    }
+    .card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,0.5); box-shadow: 0 10px 30px rgba(88,101,242,0.2); }
 
+    .steps-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .rules-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    
     .team-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .cta { padding: 50px 40px; }
   }
@@ -345,10 +296,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation: none !important;
-      transition: none !important;
-    }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
@@ -364,21 +312,29 @@
 <nav>
   <div class="logo">Chill House</div>
   <div class="links">
-    <a href="#features">Атмосфера</a>
+    <a href="#start">Старт</a>
+    <a href="#features">Фишки</a>
     <a href="#rules">Правила</a>
-    <a href="#team">Команда</a>
+    <a href="#faq">FAQ</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="online-badge">
-    <div class="online-dot"></div>
-    Chill House • Уютный сервер
+  <!-- Плашка со статистикой -->
+  <div class="stats-badge" id="stats-container">
+    <div class="stat-item">
+      <div class="dot-online"></div>
+      <span>Онлайн: <span id="online-count">...</span></span>
+    </div>
+    <div class="stat-item">
+      <div class="dot-offline"></div>
+      <span>Оффлайн: <span id="offline-count">...</span></span>
+    </div>
   </div>
+  
   <h1>Chill House</h1>
   <p>Твоё идеальное место для отдыха после школы или работы. Общение без токсичности, классные игры, музыка и новые друзья.</p>
   
-  <!-- ЕДИНСТВЕННАЯ КНОПКА ВХОДА -->
   <a class="btn-discord" href="https://discord.gg/JAPHSp5Dc" target="_blank" rel="noopener">
     <svg viewBox="0 0 127.14 96.36" fill="currentColor">
       <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
@@ -386,6 +342,29 @@
     Зайти в Chill House
   </a>
 </header>
+
+<!-- НОВЫЙ БЛОК: С ЧЕГО НАЧАТЬ -->
+<section id="start">
+  <h2 class="section-title">С чего начать?</h2>
+  <p class="section-sub">Три простых шага, чтобы стать своим</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h3>Заходи на сервер</h3>
+      <p>Нажми кнопку входа и авторизуйся через свой Discord аккаунт.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h3>Читай правила</h3>
+      <p>Ознакомься с правилами ниже, чтобы избежать неприятных ситуаций.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h3>Выбирай роли</h3>
+      <p>Зайди в канал #роли и выбери игры или интересы, чтобы найти друзей!</p>
+    </div>
+  </div>
+</section>
 
 <section id="features">
   <h2 class="section-title">Что у нас есть?</h2>
@@ -425,14 +404,11 @@
   </div>
 </section>
 
-<!-- НОВЫЙ РАЗДЕЛ: ПРАВИЛА -->
 <section id="rules">
   <h2 class="section-title">Правила сервера</h2>
   <p class="section-sub">Пожалуйста, ознакомься перед общением. Незнание правил не освобождает от ответственности.</p>
 
   <div class="rules-grid">
-    
-    <!-- ТЕКСТ -->
     <div class="rule-block">
       <div class="rule-title">💬 ТЕКСТ</div>
       <div class="rule-item"><span class="rule-text">1.1 Флуд/спам</span><span class="rule-punish">мут 60м</span></div>
@@ -449,7 +425,6 @@
       <div class="rule-item"><span class="rule-text">1.12 Травля/угрозы</span><span class="rule-punish">мут/бан</span></div>
     </div>
 
-    <!-- ГОЛОС -->
     <div class="rule-block">
       <div class="rule-title">🎙 ГОЛОС</div>
       <div class="rule-item"><span class="rule-text">2.1 Реклама</span><span class="rule-punish">бан 7д/∞</span></div>
@@ -464,7 +439,6 @@
       <div class="rule-item"><span class="rule-text">2.10 Крики/перебивание</span><span class="rule-punish">пред/мут</span></div>
     </div>
 
-    <!-- НИКИ -->
     <div class="rule-block">
       <div class="rule-title">👤 НИКИ</div>
       <div class="rule-item"><span class="rule-text">3.1 Оскорбительные</span><span class="rule-punish">пред/смена/бан</span></div>
@@ -473,7 +447,6 @@
       <div class="rule-item"><span class="rule-text">3.4 Выдача за админа</span><span class="rule-punish">бан ∞</span></div>
     </div>
 
-    <!-- ОБЩЕЕ -->
     <div class="rule-block">
       <div class="rule-title">🛡 ОБЩЕЕ</div>
       <div class="rule-item"><span class="rule-text">4.1 Незнание правил</span><span class="rule-punish">≠ ответственность</span></div>
@@ -483,37 +456,54 @@
       <div class="rule-item"><span class="rule-text">4.5 Уважайте участников</span><span class="rule-punish">всегда</span></div>
     </div>
 
-    <!-- Дополнительное правило 4.6 -->
     <div class="rule-note">
       * 4.6 Руководство сервера может выдать игроку наказание, если считает, что он наносит ущерб серверу или участникам.
     </div>
-
   </div>
 </section>
 
-<!-- РАЗДЕЛ: КОМАНДА СЕРВЕРА -->
+<!-- НОВЫЙ БЛОК: FAQ -->
+<section id="faq">
+  <h2 class="section-title">Частые вопросы</h2>
+  <p class="section-sub">Ответы на то, что спрашивают чаще всего</p>
+  
+  <div class="faq-grid">
+    <details>
+      <summary>Как подать жалобу на участника?</summary>
+      <div class="faq-answer">Зайди в канал #тикеты и создай обращение. Прикрепи скриншоты или видео нарушения, чтобы модерация могла быстро разобраться.</div>
+    </details>
+    <details>
+      <summary>Как получить роли игр или интересов?</summary>
+      <div class="faq-answer">Перейди в канал #роли и нажми на реакции под сообщением с нужной игрой (например, CS2, Minecraft). Роль выдастся автоматически.</div>
+    </details>
+    <details>
+      <summary>Можно ли рекламировать свой сервер?</summary>
+      <div class="faq-answer">Нет, реклама сторонних серверов и ссылок строго запрещена (правило 1.2). Это карается баном.</div>
+    </details>
+    <details>
+      <summary>Как стать модератором?</summary>
+      <div class="faq-answer">Следи за каналом #объявления. Когда открывается набор в стафф, там появляется специальная форма для заполнения.</div>
+    </details>
+  </div>
+</section>
+
 <section id="team">
   <h2 class="section-title">Наша команда</h2>
   <p class="section-sub">Те, кто следит за порядком и уютом</p>
 
   <div class="team-cards">
-    <!-- gor_capone -->
     <div class="staff-card">
       <span class="staff-icon">👑</span>
       <div class="staff-display-name">Gor Capone</div>
       <div class="staff-username">gor_capone</div>
       <div class="staff-role">Владелец</div>
     </div>
-
-    <!-- gravitifols -->
     <div class="staff-card">
       <span class="staff-icon">👑</span>
       <div class="staff-display-name">Я просто черепашка 🐢</div>
       <div class="staff-username">gravitifols</div>
       <div class="staff-role">Владелец</div>
     </div>
-
-    <!-- Erik -->
     <div class="staff-card">
       <span class="staff-icon">🛡️</span>
       <div class="staff-display-name">! Erik</div>
@@ -533,6 +523,37 @@
 <footer>
   © 2026 Chill House • Сделано с душой 💜
 </footer>
+
+<!-- СКРИПТ: ОНЛАЙН И ОФФЛАЙН СТАТИСТИКА -->
+<script>
+  // Используем API приглашения, чтобы получить и онлайн, и общее число
+  const inviteCode = 'JAPHSp5Dc';
+  
+  async function getDiscordStats() {
+    try {
+      const response = await fetch(`https://discord.com/api/invites/${inviteCode}?with_counts=true`);
+      if (!response.ok) throw new Error('Ошибка API');
+      
+      const data = await response.json();
+      
+      const online = data.approximate_presence_count || 0;
+      const total = data.approximate_member_count || 0;
+      // Считаем оффлайн (всего минус онлайн)
+      const offline = total - online; 
+      
+      document.getElementById('online-count').innerText = online;
+      document.getElementById('offline-count').innerText = offline > 0 ? offline : 0;
+      
+    } catch (error) {
+      // Если произошла ошибка (например, заблокировали API), скрываем цифры
+      document.getElementById('stats-container').innerHTML = '<span style="color: #a78bfa;">Chill House • Уютный сервер</span>';
+    }
+  }
+
+  // Запускаем сразу и обновляем каждые 60 секунд
+  getDiscordStats();
+  setInterval(getDiscordStats, 60000);
+</script>
 
 </body>
 </html>
